@@ -1,0 +1,58 @@
+.records{
+    display: flex;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    background-color:rgb(255, 245, 238, 0.9);
+  }
+
+  .numbers{
+      display: flex;
+      padding: 20px 20px;
+  }
+
+  .pat, .dea {
+      padding: 10px 15px;
+      font-size: 16px;
+      width: 50%;
+  }
+
+  .pat {
+      border-right: 1.5px indigo solid;
+  }
+
+  .pat span, .dea span{
+      font-size: 32px;
+      color:mediumslateblue;
+  }
+.sortgroup{
+    display: flex;
+    justify-content:center;
+    margin-bottom: 50px;
+    color:white;
+}
+
+.sort{
+    margin-right: 30px;
+}
+
+input[type="submit"]{
+  background-color:white; /* Green */
+  border: none;
+  border-radius: 10%;
+  color:mediumslateblue;
+  padding: 7px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+select{
+    color: darkorchid;
+}

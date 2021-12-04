@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} | My Page {% endblock %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static', filename='mypage.css')}}"> {% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Personal Information</h2>
+    <form class="my-form" action="{{url_for('mypage')}}" method="GET">
+  
+      <label for="fname">Name</label>
+      <input type="text" id="name" name="name" value="{{current_user.name}}">
+  
+      <label for="lname">Surname</label>
+      <input type="text" id="sname" name="surname" value="{{current_user.surname}}">
+  
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" value="{{current_user.cname}}">
+
+      <label for="country">Phone</label>
+      <input type="text" id="phone" name="phone" value="{{current_user.phone}}">
+
+      <label for="country">Salary</label>
+      <input type="text" id="salary" name="salary" value="{{current_user.salary}}">
+
+      {% if current_user.is_doctor %}
+      <label for="degree">Degree</label>
+      <input type="text" id="degree" name="degree" value="{{ degree }}">
+      {% else %}
+      <label for="department">Department</label>
+      <input type="text" id="department" name="department" value="{{ department }}">
+      {% endif %}
+
+      <div class="btns">
+        <input type="button" value="Edit" class="edt-btn">
+        <input type="submit" value="Done" class="sbt-btn">
+      </div>
+  
+    </form>
+  </div>
+{% endblock %}

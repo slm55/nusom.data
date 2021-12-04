@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static', filename='register.css')}}"> {% endblock %}
+{% block title %}{{ super() }} | Register {% endblock %}
+{% block navbar %}
+    <div class="navcontainer">
+    <div class="navcont">
+    <div class="navbar" id="myNavbar">
+        <a href="{{ url_for('index') }}" class="active">NUSOM.data</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('records') }}">Records</a>
+        <div class="dropdown">
+            <button class="dropbtn">People 
+            </button>
+            <div class="dropdown-content">
+              <a href="{{ url_for('doctors') }}">Doctors</a>
+              <a href="{{ url_for('publicservants') }}">Public Servants</a>
+            </div>
+          </div> 
+        <div class="topnav-right">
+        <a href="{{ url_for('login') }}">Login</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endblock %}
+{% block content %}
+<div class="frm">
+    <form name="reg" action="{{ url_for('register') }}" method="POST">
+        <center><h3>Register</h3></center>
+        {{ form.hidden_tag() }}
+        <input type="radio" id="doctor" name="position" value="degree" >
+        <label for="doctor">I'm a doctor</label><br>
+        <input type="radio" id="ps" name="position" value="dept">
+        <label for="ps">I'm a public servant</label><br><br>
+        {{ wtf.form_field(form.name) }}
+        {{ wtf.form_field(form.surname) }}
+        {{ wtf.form_field(form.phone) }}
+        {{ wtf.form_field(form.salary) }}<br>
+        {{ wtf.form_field(form.country) }}
+        <span class="pos"></span>
+        {{ wtf.form_field(form.email) }}
+        {{ wtf.form_field(form.password) }}<br>
+        {{ wtf.form_field(form.repeat_password) }}
+        <input type="submit" value="register">
+        <center><p>Already registered? Sign in <a href={{url_for("login")}}>here</a></p></center>
+    </form>
+</div>
+{% endblock %}

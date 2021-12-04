@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} | Records {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='records.css')}}">
+{% endblock %}
+{% block content %}
+<div class="sortgroup">
+<div class="sort">
+<form class="sort" method="get" action="{{url_for('records')}}">
+    <br>
+    <select name="sort" id="sortlist">
+        <option {% if sort == '' or sort == 'date'  %} selected {% endif %} value="date">date</option>
+        <option {% if sort == 'disease_code' %} selected {% endif %} value="disease_code">disease code</option>
+        <option {% if sort == 'total_deaths' %} selected {% endif %} value="total_deaths">total deaths</option>
+        <option {% if sort == 'total_patients' %} selected {% endif %} value="total_patients">total patients</option>
+    </select>
+    <input type="submit" value="Sort">
+</form>
+</div>
+<div class="group">
+    <form class="group" method="get" action="{{url_for('records')}}">
+        <br>
+        <select name="sort" id="sortlist">
+            <option {% if sort == '' or sort == 'date'  %} selected {% endif %} value="date">date</option>
+            <option {% if sort == 'disease_code' %} selected {% endif %} value="disease_code">disease code</option>
+            <option {% if sort == 'total_deaths' %} selected {% endif %} value="total_deaths">total deaths</option>
+            <option {% if sort == 'total_patients' %} selected {% endif %} value="total_patients">total patients</option>
+        </select>
+        <input type="submit" value="Group">
+    </form>
+    </div>
+</div>
+<div class="records">
+    {% for (record, author) in res %}
+    <div class="card">
+        <div class="numbers">
+            <div class="pat"><span>{{record.total_patients}}</span><br><center>patients</center></div>
+            <div class="dea"><span>{{record.total_deaths}}</span><br><center>deaths</center></div>
+    </div>
+        <h1>{{record.disease_code}}</h1>
+        <p class="title">{{record.cname}}</p>
+        <p>{{author.name}} {{author.surname}}</p>
+        <p>{{record.create_date.strftime('%Y-%m-%d')}}</p>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='base.css')}}"> 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
+    {% block style %}{% endblock %}
+    <title> {% block title %} NUSOM.data {% endblock %} </title>
+</head>
+<body>
+    {% block navbar %}
+    <div class="navcontainer">
+    <div class="navcont">
+    <div class="navbar" id="myNavbar">
+        <a href="{{ url_for('index') }}" class="active">NUSOM.data</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('records') }}">Records</a>
+        <div class="dropdown">
+            <button class="dropbtn">People 
+            </button>
+            <div class="dropdown-content">
+              <a href="{{ url_for('doctors') }}">Doctors</a>
+              <a href="{{ url_for('publicservants') }}">Public Servants</a>
+            </div>
+          </div> 
+        <div class="topnav-right">
+        {% if current_user.is_authenticated%}
+        <div class="dropdown">
+            <button class="dropbtn">My Page 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="{{ url_for('mypage') }}">Personal Info</a>
+              {% if current_user.is_doctor %}
+              <a href="{{ url_for('mycontrs') }}">My Contributions</a>
+              {% else %}
+              <a href="{{ url_for('myrecords') }}">My Records</a>
+              {% endif %}
+            </div>
+          </div> 
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endblock %}
+    
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

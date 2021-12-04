@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} | My Contributions {% endblock %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static', filename='mycontrs.css')}}">
+<script src="{{url_for('static', filename='mycontrs.js')}}">
+</script> {% endblock %}
+{% block content %}
+<div class="contr">
+<div class="crt-rcr">
+    <form class="dtype" action="{{url_for('dtype')}}" method="POST">
+        <label for="newtype">Enter a new disease type</label>
+        <input type="text" id="newtype" name="name" value="" placeholder="Disease type name">
+        <label for="descr" >Description</label>
+        <textarea id="descr" name="description" placeholder="Describe the disease type..." style="height:200px"></textarea>
+        <input id="dtypes-sbt-btn" type="submit" value="Done">
+    </form>
+    {% if dtypes %}
+    <form class="disease" action="{{url_for('disease')}}" method="POST">
+        <label for="disease_code">Disease type</label>
+        <input list="dtypeslist" name="dtype">
+  <datalist id="dtypeslist">
+      {% for dt in dtypes %}
+    <option value="{{ dt.name }}">
+        {% endfor %}
+  </datalist>
+        <label for="disease_code">Disease code</label>
+        <input type="text"  name="dis_code" value="" placeholder="">
+        <label for="disease_name">Disease name</label>
+        <input type="text"  name="dis_name" value="" placeholder=""> 
+        <label for="disease_pathogen">Disease pathogen</label>
+        <input type="text"  name="dis_path" value="" placeholder="">
+        <label for="dis_year">Discovered year</label>
+        <input type="text"  name="dis_year" value="" placeholder=""> 
+        <label for="dis_country">Discovered country</label>
+        <input type="text"  name="dis_country" value="" placeholder=""> 
+        <label for="descr" display="block">Description</label>
+        <textarea name="description" placeholder="Describe the disease ..." style="height:200px"></textarea>
+        <input type="submit" id="disease-sbt-btn" value="Done">
+    </form>
+    {% endif %}
+</div>
+{% if res %}
+<div class="edt-rcr">
+    {% for r in res %}
+    <div>
+        <h2>{{r.dtype.name}}</h2>
+        <p>{{r.dtype.description}}</p>
+        {% for disease in r.diseases %}
+        <div>
+            <form class="my-dis-form-{{disease[0].dis_id}}" action="{{url_for('mycontrs')}}" method="get">
+
+                <label for="fname">Disease name</label>
+                <input type="text" id="name" name="name" value="{{disease[0].disease_name}}">
+            
+                <label for="lname">Disease code</label>
+                <input type="text" id="sname" name="code" value="{{disease[0].disease_code}}">
+            
+                <label for="country">Disease pathogen</label>
+                <input type="text" id="country" name="pathogen" value="{{disease[0].pathogen}}">
+
+                <label for="descr" display="block">Disease description</label>
+                <textarea name="description" style="height:200px">{{disease[0].description}}</textarea>
+          
+                <label for="country">Discovered country</label>
+                <input type="text" id="phone" name="cname" value="{{disease[1].cname}}">
+          
+                <label for="country">Discovered year</label>
+                <input type="text" id="salary" name="date" value="{{disease[1].first_enc_date}}">
+
+                <input type="hidden" id="id" name="id" value="{{disease[0].dis_id}}">
+          
+                <input type="button" value="Edit" class="dis-edt-btn-{{disease[0].dis_id}}">
+                <input type="submit" value="Done" class="dis-done-btn-{{disease[0].dis_id}}">
+                <input type="submit" value="Delete" class="dis-del-btn-{{disease[0].dis_id}}">
+            
+              </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+</div>
+{% endblock %}

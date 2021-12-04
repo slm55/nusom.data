@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static', filename='register.css')}}"> {% endblock %}
+{% block title %} {{ super() }} | Login {% endblock %}
+{% block navbar %}
+    <div class="navcontainer">
+    <div class="navcont">
+    <div class="navbar" id="myNavbar">
+        <a href="{{ url_for('index') }}" class="active">NUSOM.data</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('records') }}">Records</a>
+        <div class="dropdown">
+            <button class="dropbtn">People 
+            </button>
+            <div class="dropdown-content">
+              <a href="{{ url_for('doctors') }}">Doctors</a>
+              <a href="{{ url_for('publicservants') }}">Public Servants</a>
+            </div>
+          </div> 
+        <div class="topnav-right">
+        <a href="{{ url_for('register') }}">Register</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endblock %}
+{% block content %}
+<div class="frm">
+    <form action="{{ url_for('login') }}" method="POST">
+      <center><h3>Login</h3></center>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.email) }}
+        {{ wtf.form_field(form.password) }}
+        <input type="submit" value="login">
+       <center><p>Do not have an account? Register <a href="{{url_for("register")}}">here</a></p></center>
+    </form>
+</div>
+{% endblock %}

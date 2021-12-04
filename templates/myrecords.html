@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} | My Contributions {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='mycontrs.css')}}">
+<script src="{{url_for('static', filename='myrecords.js')}}"></script> {% endblock %}
+{% block content %}
+<div class="contr">
+    <div class="crt-rcr">
+        <h2>Create a new record</h2>
+        <form class="crt-record" action="{{url_for('recordadd')}}" method="POST">
+            <label for="country">Country</label>
+            <input list="cnamelist" name="cname">
+            <datalist id="cnamelist">
+                {% for country in countries %}
+                <option value="{{ country[0] }}">
+                    {% endfor %}
+            </datalist>
+            <label for="disease_code">Disease code</label>
+            <input list="dcodelist" name="dcode">
+            <datalist id="dcodelist">
+                {% for disease_code in disease_codes %}
+                <option value="{{ disease_code[0] }}">
+                    {% endfor %}
+            </datalist>
+            <label for="deaths">Total deaths</label>
+            <input type="text" name="deaths" value="" placeholder="">
+            <label for="patients">Total patients</label>
+            <input type="text" name="patients" value="" placeholder="">
+            <input type="submit" id="record-sbt-btn" value="Done">
+        </form>
+    </div>
+    {% if records %}
+    <div class="edt-rcr">
+        <h2>My records</h2>
+        {% for record in records %}
+        <div>
+            <form class="record-form-{{record.rec_id}}" action="{{url_for('myrecords')}}" method="get">
+                <label for="country">Country</label>
+                <input list="cnamelist" type="text" name="cname" value={{record.cname}}>
+                <datalist id="cnamelist">
+                    {% for country in countries %}
+                    <option value="{{ country.cname }}">
+                        {% endfor %}
+                </datalist>
+                <label for="disease_code">Disease code</label>
+                <input list="dcodelist" type="text" name="dcode" value={{record.disease_code}}>
+                <datalist id="dcodelist">
+                    {% for disease_code in disease_codes %}
+                    <option value="{{ disease_code }}">
+                        {% endfor %}
+                </datalist>
+                <label for="deaths">Total deaths</label>
+                <input type="text" name="deaths" value="{{record.total_deaths}}" placeholder="">
+                <label for="patients">Total patients</label>
+                <input type="text" name="patients" value="{{record.total_patients}}" placeholder="">
+
+
+                <input type="hidden" id="id" name="id" value="{{record.rec_id}}">
+
+                <input type="button" value="Edit" class="rec-edt-btn-{{record.rec_id}}">
+                <input type="submit" value="Done" class="rec-done-btn-{{record.rec_id}}">
+                <input type="submit" value="Delete" class="rec-del-btn-{{record.rec_id}}">
+
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

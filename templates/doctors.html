@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} | Records {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='mycontrs.css')}}">
+{% endblock %}
+{% block content %}
+<div class="records">
+    {% for (doctor, user) in doctors %}
+    <div>
+        <p>Name: <a href="">{{user.name}}  {{user.surname}}</a></p>
+        <p>Degree: {{doctor.degree}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Phone: {{user.phone}}</p>
+        <p>Country: {{user.cname}}</p>
+        <p>----------------</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
