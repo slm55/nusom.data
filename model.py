@@ -20,6 +20,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
+
+ENV = 'prod'
+
+if ENV == 'dev':
+    app.debug = True
+    app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql+psycopg2://admin:admin@localhost:5432/postgres'
+else:
+    app.debug = False
+    app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://sceyzibbxruxct:f90e46335d3346e0457eb17c54f6ceeb40310bb313c1770fe8b9bb49f98a01f1@ec2-54-89-105-122.compute-1.amazonaws.com:5432/d426l5d8m5ohqc'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 app.config.from_pyfile('config.cfg')
 app.config["SECRET_KEY"] = "THIS IS A SECRET"
 Bootstrap(app)
