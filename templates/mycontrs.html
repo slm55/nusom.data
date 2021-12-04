@@ -6,6 +6,8 @@
 {% block content %}
 <div class="contr">
 <div class="crt-rcr">
+    <div class="dis-crt">
+    <center><h3>Add a new disease type</h3></center>
     <form class="dtype" action="{{url_for('dtype')}}" method="POST">
         <label for="newtype">Enter a new disease type</label>
         <input type="text" id="newtype" name="name" value="" placeholder="Disease type name">
@@ -13,15 +15,18 @@
         <textarea id="descr" name="description" placeholder="Describe the disease type..." style="height:200px"></textarea>
         <input id="dtypes-sbt-btn" type="submit" value="Done">
     </form>
+    </div>
     {% if dtypes %}
+    <div class="dis-upd">
+    <center><h3>Add a new disease</h3></center>
     <form class="disease" action="{{url_for('disease')}}" method="POST">
         <label for="disease_code">Disease type</label>
-        <input list="dtypeslist" name="dtype">
-  <datalist id="dtypeslist">
+        <select id="country" name="dtype">
       {% for dt in dtypes %}
-    <option value="{{ dt.name }}">
+    <option value="{{ dt.name }}">{{ dt.name }}</option>>
         {% endfor %}
-  </datalist>
+    </select>
+  <br>
         <label for="disease_code">Disease code</label>
         <input type="text"  name="dis_code" value="" placeholder="">
         <label for="disease_name">Disease name</label>
@@ -30,18 +35,30 @@
         <input type="text"  name="dis_path" value="" placeholder="">
         <label for="dis_year">Discovered year</label>
         <input type="text"  name="dis_year" value="" placeholder=""> 
-        <label for="dis_country">Discovered country</label>
-        <input type="text"  name="dis_country" value="" placeholder=""> 
+        <label for="country">Country</label>
+<select id="country" name="dis_country">
+  <option value="Kazakhstan">Kazakhstan</option>
+  <option value="UK">UK</option>
+  <option value="USA">USA</option>
+  <option value="Russia">Russia</option>
+  <option value="China">China</option>
+  <option value="Australia">Australia</option>
+  <option value="France">France</option>
+  <option value="Morocco">Morocco</option>
+  <option value="Bolivia">Bolivia</option>
+</select>
         <label for="descr" display="block">Description</label>
         <textarea name="description" placeholder="Describe the disease ..." style="height:200px"></textarea>
         <input type="submit" id="disease-sbt-btn" value="Done">
     </form>
+    </div>
     {% endif %}
 </div>
 {% if res %}
-<div class="edt-rcr">
+<center><h2>My contributions</h2></center>
+<div class="records">
     {% for r in res %}
-    <div>
+    <div class="card">
         <h2>{{r.dtype.name}}</h2>
         <p>{{r.dtype.description}}</p>
         {% for disease in r.diseases %}

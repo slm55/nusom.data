@@ -24,13 +24,13 @@
         if (dr) {
         dr.addEventListener('change', function(){
             var pos = document.getElementsByClassName('pos')[0];
-            pos.innerHTML = '<div class="form-group  required"><label class="control-label" for="degree">Degree</label> <input class="form-control" id="degree" name="degree" required="" type="text" value=""></div>';
+            pos.innerHTML = '<div class="form-group  required"><label for="country">Degree</label><select id="degree" name="degree"><option value="MBBS">MBBS</option><option value="MD">MD</option><option value="PhD">PhD</option></select></div>';
         }); }
 
         var ps = document.getElementById('ps');
         if (ps) {
         ps.addEventListener('change', function(){
             var pos = document.getElementsByClassName('pos')[0];
-            pos.innerHTML = '<div class="form-group  required"><label class="control-label" for="department">Department</label> <input class="form-control" id="department" name="department" required="" type="text" value=""></div>';
+            pos.innerHTML = '<div class="form-group  required"><label for="dept">Department</label><select id="dept" name="dept"><option value="Department of Molecular Medicine">Department of Molecular Medicine</option><option value="Department of Pharmacology">Department of Pharmacology</option><option value="Department of Public Health">Department of Public Health</option></select></div>';
         }); }
     });

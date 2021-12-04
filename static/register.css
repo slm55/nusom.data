@@ -43,7 +43,7 @@ input[type=text], select {
 
   form input[type="submit"]{
     margin-top: 25px;
-    background-color: mediumpurple;
+    background-color: mediumslateblue;
     height: 40px;
     vertical-align: middle;
   }
@@ -64,4 +64,3 @@ input[type=text], select {
     color: mediumslateblue;
   }
 
- 

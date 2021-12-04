@@ -6,6 +6,8 @@ $(document).ready(function() {
      $("." + form.attr('class')+ ' input[type=text]').removeAttr('disabled');
      $("." + form.attr('class')+ ' input[name=cname]').removeAttr('type');
      $("." + form.attr('class')+ ' input[name=dcode]').removeAttr('type');
+     $("." + form.attr('class')+ ' input[name=cname]').attr('value','');
+     $("." + form.attr('class')+ ' input[name=dcode]').attr('value','');
 
  });
 

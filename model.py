@@ -141,11 +141,6 @@ class Record(db.Model):
                             server_default=func.now())
 
 
-class Department(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -158,7 +153,7 @@ class RegisterForm(FlaskForm):
     salary = IntegerField('Salary', validators=[InputRequired()])
     country = StringField('Country', validators=[InputRequired()])
     degree = StringField('Degree')
-    department = StringField('Department')
+    dept = StringField('Department')
     email = StringField("Email", validators=[Email()])
     password = PasswordField("Password", validators=[Length(min=5)])
     repeat_password = PasswordField(
@@ -175,7 +170,7 @@ def register():
         db.session.commit()
         if form.degree.data == None:
             ps = PublicServant(email=form.email.data,
-                               department=form.department.data)
+                               department=form.dept.data)
             db.session.add(ps)
         else:
             doctor = Doctor(email=form.email.data, degree=form.degree.data)
@@ -350,9 +345,13 @@ def recordadd():
 @app.route("/recordedit", methods=['POST'])
 def recordedit():
     record = Record.query.filter_by(rec_id=request.form['id']).first()
-    if request.form['cname'] != record.cname:
+    if request.form['cname'] == '':
+        print()
+    elif request.form['cname'] != record.cname:
         record.cname = request.form['cname']
-    if request.form['dcode'] != record.disease_code:
+    if request.form['dcode'] == '':
+        print()
+    elif request.form['dcode'] != record.disease_code:
         record.disease_code = request.form['dcode']
     if request.form['deaths'] != record.total_deaths:
         record.total_deaths = request.form['deaths']
@@ -374,19 +373,19 @@ def recorddelete(id):
 def records():
     sort = request.args.get('sort')
     res = []
-    if  sort == None or sort == 'date':
+    if  sort == None or sort == '0':
         for record in Record.query.order_by(desc(Record.create_date)).all():
             res.append((record, Users.query.filter_by(
                 email=record.email).first()))
-    if sort == 'disease_code':
+    if sort == '1':
         for record in Record.query.order_by(desc(Record.disease_code)).all():
             res.append((record, Users.query.filter_by(
                 email=record.email).first()))
-    if sort == 'total_deaths':
+    if sort == '2':
         for record in Record.query.order_by(desc(Record.total_deaths)).all():
             res.append((record, Users.query.filter_by(
                 email=record.email).first()))
-    if sort == 'total_patients':
+    if sort == '3':
         for record in Record.query.order_by(desc(Record.total_patients)).all():
             res.append((record, Users.query.filter_by(
                 email=record.email).first()))

@@ -11,6 +11,40 @@ input[type=text], select, textarea {
 
  .contr {
     border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+  }
+
+  .crt-rcr{
+    display: flex;
+    width:80%;
+    margin: 10px auto;
+  }
+
+  .crt-rcrd{
+    width:40%;
+    margin: 10px auto;
+    color: white;
+  }
+
+  .dis-crt, .dis-upd {
+    padding: 15px 15px;
+    width: 50%;
+    color:white;
+  }
+
+  .records{
+    display: flex;
+    width: 80%;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 10px 15px;
+    text-align: center;
+    font-family: arial;
+    background-color:rgb(255, 245, 238, 0.9);
+    padding: 15px 15px;
   }

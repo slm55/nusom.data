@@ -4,24 +4,22 @@
 <link rel="stylesheet" href="{{url_for('static', filename='mycontrs.css')}}">
 <script src="{{url_for('static', filename='myrecords.js')}}"></script> {% endblock %}
 {% block content %}
+<center><h2>Create a new record</h2></center>
 <div class="contr">
-    <div class="crt-rcr">
-        <h2>Create a new record</h2>
+    <div class="crt-rcrd">
         <form class="crt-record" action="{{url_for('recordadd')}}" method="POST">
             <label for="country">Country</label>
-            <input list="cnamelist" name="cname">
-            <datalist id="cnamelist">
+            <select name="cname">
                 {% for country in countries %}
-                <option value="{{ country[0] }}">
+                <option value="{{ country[0] }}">{{ country[0] }}</option>>
                     {% endfor %}
-            </datalist>
+            </select>
             <label for="disease_code">Disease code</label>
-            <input list="dcodelist" name="dcode">
-            <datalist id="dcodelist">
+            <select name="dcode">
                 {% for disease_code in disease_codes %}
-                <option value="{{ disease_code[0] }}">
+                <option value="{{ disease_code[0] }}">{{ disease_code[0] }}</option>
                     {% endfor %}
-            </datalist>
+                </select>
             <label for="deaths">Total deaths</label>
             <input type="text" name="deaths" value="" placeholder="">
             <label for="patients">Total patients</label>
@@ -30,10 +28,10 @@
         </form>
     </div>
     {% if records %}
-    <div class="edt-rcr">
-        <h2>My records</h2>
+    <center><h2>My records</h2></center>
+    <div class="records">
         {% for record in records %}
-        <div>
+        <div class="card">
             <form class="record-form-{{record.rec_id}}" action="{{url_for('myrecords')}}" method="get">
                 <label for="country">Country</label>
                 <input list="cnamelist" type="text" name="cname" value={{record.cname}}>
@@ -41,16 +39,18 @@
                     {% for country in countries %}
                     <option value="{{ country.cname }}">
                         {% endfor %}
-                </datalist>
+                </datalist><br>
                 <label for="disease_code">Disease code</label>
                 <input list="dcodelist" type="text" name="dcode" value={{record.disease_code}}>
                 <datalist id="dcodelist">
                     {% for disease_code in disease_codes %}
-                    <option value="{{ disease_code }}">
+                    <option value="{{ disease_code[0] }}">
                         {% endfor %}
                 </datalist>
+                <br>
                 <label for="deaths">Total deaths</label>
                 <input type="text" name="deaths" value="{{record.total_deaths}}" placeholder="">
+                <br>
                 <label for="patients">Total patients</label>
                 <input type="text" name="patients" value="{{record.total_patients}}" placeholder="">
 
