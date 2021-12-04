@@ -145,7 +145,7 @@ class Record(db.Model):
 def index():
     countries= ['Kazakhstan', 'USA', 'UK', 'Russia', 'China', 'France', 'Australia', 'Morocco', 'Bolivia']
     for country in countries:
-        db.session(Country(country, 0))
+        db.session(Country(cname=country, population=0))
         db.session.commit()
     return render_template('index.html')
 
