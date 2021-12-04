@@ -143,6 +143,10 @@ class Record(db.Model):
 
 @app.route('/')
 def index():
+    countries= ['Kazakhstan', 'USA', 'UK', 'Russia', 'China', 'France', 'Australia', 'Morocco', 'Bolivia']
+    for country in countries:
+        db.session(Country(country, 0))
+        db.session.commit()
     return render_template('index.html')
 
 
@@ -406,8 +410,4 @@ def publicservants():
     return render_template('publicservants.html', doctors=doctors)
 
 if __name__ == '__main__':
-    countries= ['Kazakhstan', 'USA', 'UK', 'Russia', 'China', 'France', 'Australia', 'Morocco', 'Bolivia']
-    for country in countries:
-        db.session(Country(country, 0))
-        db.session.commit()
     app.run(debug=True)
