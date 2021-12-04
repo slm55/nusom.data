@@ -406,4 +406,8 @@ def publicservants():
     return render_template('publicservants.html', doctors=doctors)
 
 if __name__ == '__main__':
+    countries= ['Kazakhstan', 'USA', 'UK', 'Russia', 'China', 'France', 'Australia', 'Morocco', 'Bolivia']
+    for country in countries:
+        db.session(Country(country))
+        db.session.commit()
     app.run(debug=True)
