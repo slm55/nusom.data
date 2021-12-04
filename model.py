@@ -1,5 +1,3 @@
-from enum import unique
-import re
 from flask import *
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
