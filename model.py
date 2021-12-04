@@ -408,6 +408,6 @@ def publicservants():
 if __name__ == '__main__':
     countries= ['Kazakhstan', 'USA', 'UK', 'Russia', 'China', 'France', 'Australia', 'Morocco', 'Bolivia']
     for country in countries:
-        db.session(Country(country))
+        db.session(Country(country, 0))
         db.session.commit()
     app.run(debug=True)
