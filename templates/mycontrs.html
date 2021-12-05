@@ -92,7 +92,6 @@
         <h2>{{r.dtype.name}}</h2>
         <p>{{r.dtype.description}}</p>
         {% for disease in r.diseases %}
-        <div>
             <form class="my-dis-form-{{disease[0].dis_id}}" action="{{url_for('mycontrs')}}" method="get">
 
                 <label for="fname">Disease name</label>
@@ -120,7 +119,6 @@
                 <input type="submit" value="Delete" class="dis-del-btn-{{disease[0].dis_id}}">
             
               </form>
-        </div>
         {% endfor %}
     </div>
     {% endfor %}
