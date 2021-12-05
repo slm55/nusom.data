@@ -29,7 +29,7 @@
         form.attr('action','/diseasedelete/' + name);
     });
 
-    $( "[class='my-dis-form'] input[type=text], [class*='my-dis-form-'] textarea" ).attr('disabled','disabled');
+    $( "[class*='my-dis-form-'] input[type=text], [class*='my-dis-form-'] textarea" ).attr('disabled','disabled');
     $( "[class*='dis-done-btn-']" ).hide();
 });
 </script> {% endblock %}
@@ -92,7 +92,7 @@
         <h2>{{r.dtype.name}}</h2>
         <p>{{r.dtype.description}}</p>
         {% for disease in r.diseases %}
-            <form class="my-dis-form" action="{{url_for('mycontrs')}}" method="get">
+            <form class="my-dis-form-{{disease[0].dis_id}}" action="{{url_for('mycontrs')}}" method="get">
 
                 <label for="fname">Disease name</label>
                 <input type="text" id="name" name="name" value="{{disease[0].disease_name}}">
